@@ -7,8 +7,8 @@ MAXIMUM_BALANCE = 90
  end
 
 def top_up(value)
+  raise "Maximum balance of #{MAXIMUM_BALANCE} exceeded" if @balance + value > MAXIMUM_BALANCE
   @balance = @balance + value
-  raise "Maximum balance exceeded" if @balance + value > MAXIMUM_BALANCE
 end
 
 def deduct(value)
