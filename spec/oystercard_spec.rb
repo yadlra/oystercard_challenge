@@ -20,4 +20,14 @@ describe "#top_up" do
     expect{ subject.top_up 1 }.to raise_error "Maximum balance exceeded"
 end
 end
+
+describe "#deduct" do
+
+  it { is_expected.to respond_to(:deduct).with(1).argument }
+
+  it 'deducts an amount from the balance' do
+    subject.top_up(20)
+    expect{ subject.deduct 1}.to change{ subject.balance }.by -1
+  end
+end
 end
