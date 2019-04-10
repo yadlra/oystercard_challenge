@@ -29,5 +29,5 @@ describe "#deduct" do
     subject.top_up(20)
     expect{ subject.deduct 1}.to change{ subject.balance }.by -1
   end
-end
+ end
 end
