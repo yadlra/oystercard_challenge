@@ -6,6 +6,10 @@ describe Oystercard do
   it 'checks card balance is zero' do
     expect(subject.balance).to eq (0)
   end
+  it 'checks the card has empty list of jorneys'
+
+  it 'checks touching ina nd out creates one journey'
+
 
   describe "#top_up" do
 
@@ -66,5 +70,8 @@ describe '#touch_out' do
     subject.touch_out
     expect(subject.entry_station).to eq nil
   end
+
+  it 'accepts exit station'
+
 end
 end
