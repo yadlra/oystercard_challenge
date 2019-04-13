@@ -2,14 +2,15 @@
 require 'oystercard'
 
 describe Oystercard do
-  let(:station) { double }
+  let(:station) { double :station}
+
   it 'checks card balance is zero' do
     expect(subject.balance).to eq (0)
   end
-  it 'checks the card has empty list of jorneys'
 
-  it 'checks touching ina nd out creates one journey'
-
+  it 'checks journey history is empty' do
+    expect(subject.journey_history).to be_empty
+  end
 
   describe "#top_up" do
 
@@ -27,7 +28,6 @@ describe Oystercard do
   end
 
   it 'starts not in journey' do
-
     expect(subject.in_journey).to eq false
   end
 
@@ -53,25 +53,37 @@ describe '#touch_in' do
 end
 
 describe '#touch_out' do
+  let(:entry_station) { double :station }
+  let(:exit_station) { double :station }
 
-  it 'shows when journey has ended' do
-    expect(subject.touch_out).to eq false
-  end
+  # it 'shows when journey has ended' do
+  #   expect(subject.touch_out).to eq false
+  # end
 
   it 'charges when the card is touched out' do
     subject.top_up(6)
     subject.touch_in(station)
-    expect {subject.touch_out}.to change{subject.balance}.by(- Oystercard::MIN_FARE)
+    expect {subject.touch_out(station)}.to change{subject.balance}.by(- Oystercard::MIN_FARE)
   end
 
   it 'makes entry station nil' do
     subject.top_up(6)
     subject.touch_in(station)
-    subject.touch_out
+    subject.touch_out(station)
     expect(subject.entry_station).to eq nil
   end
 
-  it 'accepts exit station'
-
+  it 'accepts exit station' do
+    subject.touch_out(station)
+    expect(subject.exit_station).to eq station
+  end
 end
+
+describe '#add_journey'
+  it 'creates journey when touching in and out' do
+    subject.top_up(5)
+    subject.touch_in(station)
+    subject.touch_out(station)
+    expect {subject.add_journey }.to change {subject.journey_history.count}.by(1)
+  end
 end
