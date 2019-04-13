@@ -87,3 +87,16 @@ describe '#add_journey'
     expect {subject.add_journey }.to change {subject.journey_history.count}.by(1)
   end
 end
+
+
+describe Station do
+  subject { described_class.new("Aldgate", 4) }
+
+  it 'checks its name' do
+    expect(subject.name).to eq("Aldgate")
+  end
+
+  it 'checks its zone' do
+    expect(subject.zone).to eq 4
+  end
+end

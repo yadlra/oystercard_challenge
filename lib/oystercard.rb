@@ -1,3 +1,13 @@
+class Station
+
+  attr_reader :name, :zone
+
+  def initialize(name, zone)
+    @name = name
+    @zone = zone
+  end
+end
+
 class Oystercard
 
   attr_reader :balance, :in_journey, :entry_station, :exit_station, :journey_history
